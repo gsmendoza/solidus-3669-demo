@@ -101,6 +101,7 @@ end
 
 Spree::Api::Config.configure do |config|
   config.requires_authentication = true
+  config.disable_api_routes = true
 end
 
 Spree.user_class = "Spree::LegacyUser"
