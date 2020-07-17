@@ -1,24 +1,22 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is a demo for https://github.com/solidusio/solidus/pull/3715.
 
-Things you may want to cover:
+## Manual testing
 
-* Ruby version
+```cucumber
+Given my local solidus repo is checked out to https://github.com/solidusio/solidus/pull/3715
 
-* System dependencies
+And I have https://github.com/gsmendoza/solidus-3669-demo cloned to a directory
+  in the same directory as solidus
 
-* Configuration
+When I set `Spree::Api::Config[:disable_api_routes]` to true in `config/initializers/spree.rb`
+And I run `rails routes`
+Then I should not see any of the `Spree::Core::Engine` api routes
+And I should continue seeing the `Spree::Core::Engine` backend routes
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+When I set `Spree::Api::Config[:disable_api_routes]` to false in `config/initializers/spree.rb`
+And I run `rails routes`
+Then I should see the `Spree::Core::Engine` api routes
+And I should see the `Spree::Core::Engine` backend routes
+```
